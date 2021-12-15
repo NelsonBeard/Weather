@@ -12,10 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = MainAdapter()
@@ -34,7 +30,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mainRecyclerView.adapter = adapter
-        binding.mainRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
         adapter.listener = MainAdapter.OnItemClick { weather ->
 
