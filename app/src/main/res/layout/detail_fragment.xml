@@ -15,28 +15,41 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:textSize="35sp"
+            android:layout_marginTop="10sp"
+            android:textSize="@dimen/city_name_text_size"
             android:textStyle="bold"
             tools:text="Ufa" />
+
+        <TextView
+            android:id="@+id/latLon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/city_latLon_text_size"
+            tools:text="0000000/000000" />
 
         <TextView
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:text="-10"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10sp"
+            tools:text="-10"
+            android:textSize="@dimen/city_data_text_size" />
+
+        <TextView
+            android:id="@+id/feelsLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            tools:text="-10"
+            android:textSize="@dimen/city_data_text_size" />
 
         <TextView
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:text="30%"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10sp"
+            tools:text="30%"
+            android:textSize="@dimen/city_data_text_size"/>
 
     </LinearLayout>
 

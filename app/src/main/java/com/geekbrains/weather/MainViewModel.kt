@@ -22,7 +22,7 @@ class MainViewModel : ViewModel() {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
-            Thread.sleep(3000)
+            Thread.sleep(1000)
 
             val weather = if (isRussian) {
                 repository.getWeatherFromLocalStorageRus()

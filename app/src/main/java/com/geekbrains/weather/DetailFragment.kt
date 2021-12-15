@@ -33,7 +33,10 @@ class DetailFragment : Fragment() {
 
         val weather = arguments?.getParcelable<Weather>("WEATHER_EXTRA")
         binding.cityName.text = weather?.city?.name ?: ""
-        binding.temperature.text = weather?.temperature.toString()
+        binding.latLon.text = weather?.city?.lat.toString() + "/" + weather?.city?.lon.toString()
+        binding.temperature.text = "Температура: " + weather?.temperature.toString()
+        binding.feelsLike.text = "Ощущается как: " + weather?.feelsLike.toString()
+        binding.humidity.text = "Влажность: " + weather?.humidity
     }
 
     override fun onDestroy() {
