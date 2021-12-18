@@ -16,6 +16,7 @@ class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+
     private val adapter = MainAdapter()
     private var isRussian = true
 
@@ -47,6 +48,7 @@ class MainFragment : Fragment() {
                     .commit()
             }
         }
+
 
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
@@ -88,5 +90,11 @@ class MainFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    companion object {
+        fun newInstance() =
+            MainFragment()
+    }
 }
+
 
