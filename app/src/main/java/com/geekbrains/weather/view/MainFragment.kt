@@ -1,4 +1,4 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.geekbrains.weather.R
+import com.geekbrains.weather.Weather
 import com.geekbrains.weather.databinding.MainFragmentBinding
-import com.google.android.material.snackbar.Snackbar
+import com.geekbrains.weather.viewmodel.AppState
+import com.geekbrains.weather.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
@@ -17,12 +19,14 @@ class MainFragment : Fragment() {
     private val adapter = MainAdapter()
     private var isRussian = true
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,13 +40,14 @@ class MainFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable("WEATHER_EXTRA", weather)
 
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, DetailFragment.newInstance(bundle))
-                .addToBackStack("")
-                .commit()
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commit()
+            }
         }
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner, { state ->
             render(state)
         })
@@ -64,28 +69,24 @@ class MainFragment : Fragment() {
             is AppState.Success<*> -> {
                 val weather: List<Weather> = state.data as List<Weather>
                 adapter.setWeather(weather)
-                binding.loadingContainer.visibility = View.GONE
+                binding.loadingContainer.hide()
             }
             is AppState.Error -> {
-                binding.loadingContainer.visibility = View.VISIBLE
-                Snackbar.make(
-                    binding.root,
-                    state.error.message.toString(),
-                    Snackbar.LENGTH_INDEFINITE
-                )
-                    .setAction("Перезагрузить") {
+                binding.loadingContainer.show()
+                binding.root.showSnackBar(state.error.message.toString(), "Перезагрузить",
+                    {
                         viewModel.getWeatherFromLocalStorageRus()
-                    }.show()
+                    })
             }
 
             is AppState.Loading ->
-                binding.loadingContainer.visibility = View.VISIBLE
+                binding.loadingContainer.show()
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 }
+

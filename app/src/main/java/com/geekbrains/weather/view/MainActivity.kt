@@ -1,4 +1,4 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.view
 
 import android.os.Bundle
 

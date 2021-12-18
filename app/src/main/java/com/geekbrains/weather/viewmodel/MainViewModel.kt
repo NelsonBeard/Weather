@@ -1,8 +1,10 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekbrains.weather.model.Repository
+import com.geekbrains.weather.model.RepositoryImpl
 
 class MainViewModel : ViewModel() {
 
