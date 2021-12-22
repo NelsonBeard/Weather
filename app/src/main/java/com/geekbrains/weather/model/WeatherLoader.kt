@@ -20,7 +20,7 @@ object WeatherLoader {
 
         val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
 
-        Thread (Runnable{
+        Thread {
             var urlConnection: HttpsURLConnection? = null
 
             try {
@@ -55,7 +55,7 @@ object WeatherLoader {
             } finally {
                 urlConnection?.disconnect()
             }
-        }).start()
+        }.start()
     }
 
 

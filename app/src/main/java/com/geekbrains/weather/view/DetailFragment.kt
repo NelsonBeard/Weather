@@ -48,7 +48,7 @@ class DetailFragment : Fragment() {
                         binding.condition.text = fact.condition
                         binding.temperature.text = fact.temp.toString()
                         binding.feelsLike.text = fact.feels_like.toString()
-                        binding.humidity.text = "${fact.humidity} %"
+                        binding.humidity.text = fact.humidity.toString()
                     }
                 }
 
