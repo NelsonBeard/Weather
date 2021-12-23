@@ -11,3 +11,4 @@ data class FactDTO(
     val condition: String?,
     val humidity: Int?
 )
+

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="detail_fragment_temp">Температура, °С</string>
+    <string name="detail_fragment_feels_like">Ощущается как, °С</string>
+    <string name="detail_fragment_humidity">Влажность, %</string>
+    <string name="main_fragment_loading">LOADING</string>
 </resources>

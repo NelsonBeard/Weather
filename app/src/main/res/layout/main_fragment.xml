@@ -16,7 +16,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mainFAB"
         android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/main_fragment_margin"
         android:src="@drawable/ic_baseline_flag_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -35,9 +35,9 @@
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:text="LOADING"
-            android:textSize="35sp"
+            android:layout_marginTop="@dimen/main_fragment_margin"
+            android:text="@string/main_fragment_loading"
+            android:textSize="@dimen/main_fragment_loading_text_size"
             android:textStyle="bold"
             tools:text="Уфа" />
 

@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/city_data_margin"
-            android:text="Температура, °С"
+            android:text="@string/detail_fragment_temp"
             android:textSize="@dimen/city_data_text_size" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/city_data_margin"
-            android:text="Ощущается как, °С"
+            android:text="@string/detail_fragment_feels_like"
             android:textSize="@dimen/city_data_text_size" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/city_data_margin"
-            android:text="Влажность, %"
+            android:text="@string/detail_fragment_humidity"
             android:textSize="@dimen/city_data_text_size" />
 
         <TextView
