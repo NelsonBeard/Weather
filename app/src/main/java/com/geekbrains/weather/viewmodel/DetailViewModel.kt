@@ -1,8 +1,10 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.geekbrains.weather.model.Repository
+import com.geekbrains.weather.model.RepositoryImpl
 import java.lang.Exception
 import kotlin.random.Random
 
@@ -17,7 +19,7 @@ class DetailViewModel : ViewModel() {
         liveDataToObserve.value = AppState.Loading
 
         Thread{
-            Thread.sleep(1000)
+            Thread.sleep(500)
             if(Random.nextBoolean()){
                 val weather = repository.getWeatherFromServer()
                 liveDataToObserve.postValue(AppState.Success(weather))

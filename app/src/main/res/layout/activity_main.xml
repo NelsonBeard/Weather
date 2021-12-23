@@ -5,11 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <fragment
-        android:name="com.geekbrains.weather.MainFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+    tools:context=".view.MainActivity">
 </LinearLayout>

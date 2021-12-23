@@ -1,4 +1,4 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.viewmodel
 
 sealed class AppState {
     data class Success<T>(val data: T) : AppState()

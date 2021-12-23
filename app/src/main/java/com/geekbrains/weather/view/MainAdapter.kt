@@ -1,10 +1,12 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.geekbrains.weather.R
+import com.geekbrains.weather.Weather
 
 class MainAdapter() :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
@@ -38,14 +40,16 @@ class MainAdapter() :
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(weather: Weather) {
-            itemView.findViewById<TextView>(R.id.main_city_name_text_view).text = weather.city.name
-            itemView.setOnClickListener {
-                listener?.onClick(weather)
+            itemView.apply {
+                findViewById<TextView>(R.id.main_city_name_text_view).text = weather.city.name
+                setOnClickListener {
+                    listener?.onClick(weather)
+                }
             }
         }
     }
 
-    fun interface OnItemClick{
+    fun interface OnItemClick {
         fun onClick(weather: Weather)
     }
 

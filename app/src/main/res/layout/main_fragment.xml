@@ -29,7 +29,7 @@
         android:background="@android:color/darker_gray"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".MainFragment">
+        tools:context=".view.MainFragment">
 
         <TextView
             android:id="@+id/loading"

@@ -1,10 +1,11 @@
-package com.geekbrains.weather
+package com.geekbrains.weather.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.geekbrains.weather.Weather
 import com.geekbrains.weather.databinding.DetailFragmentBinding
 
 class DetailFragment : Fragment() {
@@ -23,7 +24,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DetailFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,12 +32,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weather = arguments?.getParcelable<Weather>("WEATHER_EXTRA")
-        binding.cityName.text = weather?.city?.name ?: ""
-        binding.latLon.text = weather?.city?.lat.toString() + "/" + weather?.city?.lon.toString()
-        binding.temperature.text = "Температура: " + weather?.temperature.toString()
-        binding.feelsLike.text = "Ощущается как: " + weather?.feelsLike.toString()
-        binding.humidity.text = "Влажность: " + weather?.humidity
+        arguments?.getParcelable<Weather>("WEATHER_EXTRA")?.let { weather ->
+            binding.cityName.text = weather.city.name
+            binding.latLon.text = "${weather.city.lat} / ${weather.city.lon}"
+            binding.temperature.text = "Температура: ${weather.temperature}"
+            binding.feelsLike.text= "Ощущается как: ${weather.feelsLike}"
+            binding.humidity.text= "Влажность: ${weather.humidity}"
+        }
+
     }
 
     override fun onDestroy() {
