@@ -16,9 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
+            android:textColor="@color/black"
             android:textSize="@dimen/city_name_text_size"
             android:textStyle="bold"
-            tools:text="Ufa" />
+            tools:text="Уфа" />
 
         <TextView
             android:id="@+id/latLon"
@@ -28,28 +29,54 @@
             tools:text="0000000/000000" />
 
         <TextView
+            android:id="@+id/condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/city_data_margin"
+            android:textSize="@dimen/city_data_text_size"
+            tools:text="Ветренно" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/city_data_margin"
+            android:text="@string/detail_fragment_temp"
+            android:textSize="@dimen/city_data_text_size" />
+
+        <TextView
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
             android:textSize="@dimen/city_data_text_size"
-            tools:text="Температура: -10" />
+            tools:text="-10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/city_data_margin"
+            android:text="@string/detail_fragment_feels_like"
+            android:textSize="@dimen/city_data_text_size" />
 
         <TextView
             android:id="@+id/feelsLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
             android:textSize="@dimen/city_data_text_size"
-            tools:text="Ощущается как: -10" />
+            tools:text="-15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/city_data_margin"
+            android:text="@string/detail_fragment_humidity"
+            android:textSize="@dimen/city_data_text_size" />
 
         <TextView
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
             android:textSize="@dimen/city_data_text_size"
-            tools:text="Влажность: 30%" />
+            tools:text="78" />
 
     </LinearLayout>
 
