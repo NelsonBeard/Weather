@@ -28,13 +28,16 @@ object WeatherLoader {
                     URL("https://api.weather.yandex.ru/v2/informers?lat=${city.lat}&lon=${city.lon}")
 
                 urlConnection = uri.openConnection() as HttpsURLConnection
-                urlConnection.addRequestProperty(
-                    "X-Yandex-API-Key",
-                    MY_API_KEY
-                )
-                urlConnection.requestMethod = "GET"
-                urlConnection.readTimeout = 10000
-                urlConnection.connectTimeout = 10000
+                with(urlConnection) {
+                    addRequestProperty(
+                        "X-Yandex-API-Key", MY_API_KEY
+                    )
+                    requestMethod = "GET"
+                    readTimeout = 10000
+                    connectTimeout = 10000
+
+                }
+
                 val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
                 val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     reader.lines().collect(Collectors.joining("\n"))
