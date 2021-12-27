@@ -6,13 +6,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.weather.R
 import com.geekbrains.weather.databinding.ActivityMainBinding
-import com.geekbrains.weather.model.MainReceiver
+import com.geekbrains.weather.model.ConnectivityActionReceiver
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val receiver = MainReceiver()
+    private val receiver = ConnectivityActionReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,11 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Weather">
+        <service
+            android:name=".model.MainIntentService"
+            android:exported="false"></service>
+
         <receiver
             android:name=".model.MainReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true" />
+        <receiver
+            android:name=".model.ConnectivityActionReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".view.MainActivity"
