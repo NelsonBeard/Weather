@@ -29,6 +29,7 @@ class MainIntentService : IntentService("MainIntentService") {
                                     temperature = weatherDTO.fact?.temp ?: 0,
                                     feelsLike = weatherDTO.fact?.feels_like ?: 0,
                                     humidity = weatherDTO.fact?.humidity ?: 0,
+                                    icon = weatherDTO.fact?.icon ?: ""
                                     )
                             )
                         })

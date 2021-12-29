@@ -9,7 +9,8 @@ data class Weather(
     val temperature: Int = 0,
     val feelsLike: Int = 0,
     val humidity: Int = 0,
-    val condition: String = ""
+    val condition: String = "",
+    val icon: String = ""
 ) : Parcelable
 
 @Parcelize

@@ -7,6 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.load
+import coil.request.ImageRequest
 import com.geekbrains.weather.Weather
 import com.geekbrains.weather.databinding.DetailFragmentBinding
 import com.geekbrains.weather.model.MainIntentService
@@ -29,6 +33,19 @@ class DetailFragment : Fragment() {
             binding.temperature.text = weather.temperature.toString()
             binding.feelsLike.text = weather.feelsLike.toString()
             binding.humidity.text = weather.humidity.toString()
+
+            val request = ImageRequest.Builder(requireContext())
+                .data("https://yastatic.net/weather/i/icons/funky/dark/${weather.icon}.svg")
+                .target(binding.weatherImage)
+                .build()
+
+            ImageLoader.Builder(requireContext())
+                .componentRegistry {
+                    add(SvgDecoder(requireContext()))
+                }
+                .build()
+                .enqueue(request)
+
         } ?: Toast.makeText(context, "ОШИБКА", Toast.LENGTH_SHORT).show()
     }
     private var _binding: DetailFragmentBinding? = null
