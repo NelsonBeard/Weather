@@ -9,7 +9,7 @@ import com.geekbrains.weather.model.RepositoryImpl
 class MainViewModel : ViewModel() {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val repository: Repository = RepositoryImpl()
+    private val repository: Repository = RepositoryImpl
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 

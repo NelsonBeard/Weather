@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.geekbrains.weather">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,6 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Weather">
+        <service
+            android:name=".model.MainIntentService"
+            android:exported="false"></service>
+
+        <receiver
+            android:name=".model.MainReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".model.ConnectivityActionReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

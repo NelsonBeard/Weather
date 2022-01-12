@@ -1,11 +1,15 @@
 package com.geekbrains.weather.model
 
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import com.geekbrains.weather.City
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
@@ -14,56 +18,35 @@ import javax.net.ssl.HttpsURLConnection
 
 object WeatherLoader {
 
+    private val WeatherAPI = Retrofit.Builder()
+        .baseUrl("https://api.weather.yandex.ru")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+        .build()
+        .create(WeatherAPI::class.java)
+
     private const val MY_API_KEY = "7408799b-53f9-4971-bb0b-217461a8df94"
 
-    fun load(city: City, listener: OnWeatherLoadListener) {
+    fun loadRetrofit(city: City, listener: OnWeatherLoadListener) {
+        WeatherAPI.getWeather(MY_API_KEY, city.lat, city.lon)
+            .enqueue(object : Callback<WeatherDTO> {
 
-        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
-
-        Thread {
-            var urlConnection: HttpsURLConnection? = null
-
-            try {
-                val uri =
-                    URL("https://api.weather.yandex.ru/v2/informers?lat=${city.lat}&lon=${city.lon}")
-
-                urlConnection = uri.openConnection() as HttpsURLConnection
-                with(urlConnection) {
-                    addRequestProperty(
-                        "X-Yandex-API-Key", MY_API_KEY
-                    )
-                    requestMethod = "GET"
-                    readTimeout = 10000
-                    connectTimeout = 10000
-
+                override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { listener.onLoaded(it) }
+                    } else {
+                        listener.onFailed(Exception(response.message()))
+                    }
                 }
 
-                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
-                val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    reader.lines().collect(Collectors.joining("\n"))
-                } else {
-                    ""
+                override fun onFailure(call: Call<WeatherDTO>, t: Throwable) {
+                    listener.onFailed(t)
                 }
-
-                Log.d("DEBUG", "result: $result")
-
-                val weatherDTO = Gson().fromJson(result, WeatherDTO::class.java)
-                handler.post { listener.onLoaded(weatherDTO) }
-
-            } catch (e: Exception) {
-                handler.post {
-                    listener.onFailed(e)
-                }
-                Log.e("", "Fail connection", e)
-            } finally {
-                urlConnection?.disconnect()
-            }
-        }.start()
+            })
     }
-
 
     interface OnWeatherLoadListener {
         fun onLoaded(weatherDTO: WeatherDTO)
         fun onFailed(throwable: Throwable)
     }
 }
+
