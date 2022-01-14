@@ -28,8 +28,7 @@ class App : Application() {
                                 app.applicationContext,
                                 HistoryDataBase::class.java,
                                 DB_NAME
-                            ).allowMainThreadQueries()
-                                .build()
+                            ).build()
                         } ?: throw Exception("Bad exception")
                     }
                 }
