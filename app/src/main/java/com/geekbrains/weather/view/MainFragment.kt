@@ -1,5 +1,6 @@
 package com.geekbrains.weather.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,8 @@ class MainFragment : Fragment() {
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +58,7 @@ class MainFragment : Fragment() {
         })
 
         viewModel.getWeatherFromLocalStorageRus()
+
         binding.mainFAB.setOnClickListener {
             isRussian = !isRussian
 
@@ -63,6 +67,10 @@ class MainFragment : Fragment() {
             } else {
                 viewModel.getWeatherFromLocalStorageWorld()
             }
+        }
+
+        binding.historyFAB.setOnClickListener {
+            requireContext().startActivity(Intent(requireContext(), HistoryActivity::class.java))
         }
     }
 

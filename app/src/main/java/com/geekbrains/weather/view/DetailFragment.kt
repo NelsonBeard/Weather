@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
 import coil.decode.SvgDecoder
-import coil.load
 import coil.request.ImageRequest
 import com.geekbrains.weather.Weather
 import com.geekbrains.weather.databinding.DetailFragmentBinding
 import com.geekbrains.weather.model.MainIntentService
 import com.geekbrains.weather.model.Repository
 import com.geekbrains.weather.model.RepositoryImpl
+import com.geekbrains.weather.viewmodel.DetailViewModel
 
 class DetailFragment : Fragment() {
 
@@ -27,7 +28,12 @@ class DetailFragment : Fragment() {
         }
     }
 
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this).get(DetailViewModel::class.java)
+    }
+
     private val listener = Repository.OnLoadListener {
+
         RepositoryImpl.getWeatherFromServer()?.let { weather ->
             binding.condition.text = weather.condition
             binding.temperature.text = weather.temperature.toString()
@@ -45,6 +51,8 @@ class DetailFragment : Fragment() {
                 }
                 .build()
                 .enqueue(request)
+
+            viewModel.saveHistory(weather)
 
         } ?: Toast.makeText(context, "ОШИБКА", Toast.LENGTH_SHORT).show()
     }
@@ -77,6 +85,7 @@ class DetailFragment : Fragment() {
                     putExtra("WEATHER_EXTRA", weather)
                 })
         }
+
     }
 
     override fun onDestroy() {
