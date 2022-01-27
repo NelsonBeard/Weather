@@ -1,10 +1,17 @@
 package com.geekbrains.weather.view
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.geekbrains.weather.R
@@ -25,6 +32,45 @@ class MainFragment : Fragment() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    private val permissionResult =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+            val fineLocationGranted = result.getOrDefault(
+                Manifest.permission.ACCESS_FINE_LOCATION, false
+            )
+            val coarseLocationGranted = result.getOrDefault(
+                Manifest.permission.ACCESS_COARSE_LOCATION, false
+            )
+            when {
+                fineLocationGranted or coarseLocationGranted -> showMap()
+                !ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) -> AlertDialog.Builder(requireActivity()).setTitle("Дай доступ")
+                    .setMessage("Так надо")
+                    .setPositiveButton("Дать доступ") { _, _ -> requestPermission() }
+                    .setNegativeButton("Не давать доступ") { dialog, _ -> dialog.dismiss() }
+                    .create()
+                    .show()
+                else -> requestPermission()
+            }
+        }
+
+    @SuppressLint("MissingPermission")
+    private fun showMap() {
+        requireActivity().startActivity(Intent(requireContext(), MapsActivity::class.java))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun requestPermission() {
+        permissionResult.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +81,7 @@ class MainFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mainRecyclerView.adapter = adapter
@@ -71,6 +118,10 @@ class MainFragment : Fragment() {
 
         binding.historyFAB.setOnClickListener {
             requireContext().startActivity(Intent(requireContext(), HistoryActivity::class.java))
+        }
+
+        binding.locationFAB.setOnClickListener {
+            requestPermission()
         }
     }
 
