@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "663478247405",
+    "project_id": "neat-dispatch-338617",
+    "storage_bucket": "neat-dispatch-338617.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663478247405:android:26e11294a70022a289d1e4",
+        "android_client_info": {
+          "package_name": "com.geekbrains.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663478247405-1vp31asbjb10g7rircfeohc2q2pnhgrs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKr3HWL9LZIFUZifod4EpaBHsN7n0hC2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663478247405-1vp31asbjb10g7rircfeohc2q2pnhgrs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
